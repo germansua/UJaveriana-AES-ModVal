@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:pay="http://www.servicios.co/pagos/schemas"
+            elementFormDefault="qualified"
+            attributeFormDefault="qualified"
+            targetNamespace="http://www.servicios.co/pagos/schemas">
+
+    <xsd:element name="ReferenciaFactura" type="pay:ReferenciaFactura"/>
+    <xsd:element name="ResultadoConsulta" type="pay:ResultadoConsulta"/>
+    <xsd:element name="Pago" type="pay:Pago"/>
+    <xsd:element name="Resultado" type="pay:Resultado"/>
+
+    <xsd:complexType name="ReferenciaFactura">
+        <xsd:sequence>
+            <xsd:element name="referenciaFactura" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ResultadoConsulta">
+        <xsd:sequence>
+            <xsd:element name="referenciaFactura" type="pay:ReferenciaFactura"/>
+            <xsd:element name="totalPagar" type="xsd:double"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Pago">
+        <xsd:sequence>
+            <xsd:element name="referenciaFactura" type="pay:ReferenciaFactura"/>
+            <xsd:element name="totalPagar" type="xsd:double"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Resultado">
+        <xsd:sequence>
+            <xsd:element name="referenciaFactura" type="pay:ReferenciaFactura"/>
+            <xsd:element name="mensaje" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
