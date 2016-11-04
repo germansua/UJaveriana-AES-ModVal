@@ -1,5 +1,5 @@
 
-package co.edu.javeriana.aes.modaval.pagos.artifacts;
+package co.edu.javeriana.aes.modval.pagos.artifacts;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -34,6 +34,13 @@ public class ReferenciaFactura {
 
     @XmlElement(required = true)
     protected String referenciaFactura;
+
+    public ReferenciaFactura() {
+    }
+
+    public ReferenciaFactura(String referenciaFactura) {
+        this.referenciaFactura = referenciaFactura;
+    }
 
     /**
      * Gets the value of the referenciaFactura property.

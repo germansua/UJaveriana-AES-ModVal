@@ -1,5 +1,5 @@
 
-package co.edu.javeriana.aes.modaval.pagos.artifacts;
+package co.edu.javeriana.aes.modval.pagos.artifacts;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

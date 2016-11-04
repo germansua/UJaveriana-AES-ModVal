@@ -1,5 +1,5 @@
 
-package co.edu.javeriana.aes.modaval.pagos.artifacts;
+package co.edu.javeriana.aes.modval.pagos.artifacts;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -27,7 +27,7 @@ public interface PagosInerface {
      * 
      * @param input
      * @return
-     *     returns co.edu.javeriana.aes.modaval.pagos.artifacts.ResultadoConsulta
+     *     returns co.edu.javeriana.aes.modval.pagos.artifacts.ResultadoConsulta
      */
     @WebMethod(operationName = "Cosultar", action = "consultar")
     @WebResult(name = "ResultadoConsulta", targetNamespace = "http://www.servicios.co/pagos/schemas", partName = "Input")
@@ -39,7 +39,7 @@ public interface PagosInerface {
      * 
      * @param input
      * @return
-     *     returns co.edu.javeriana.aes.modaval.pagos.artifacts.Resultado
+     *     returns co.edu.javeriana.aes.modval.pagos.artifacts.Resultado
      */
     @WebMethod(operationName = "Pagar", action = "pagar")
     @WebResult(name = "Resultado", targetNamespace = "http://www.servicios.co/pagos/schemas", partName = "Input")
@@ -51,7 +51,7 @@ public interface PagosInerface {
      * 
      * @param input
      * @return
-     *     returns co.edu.javeriana.aes.modaval.pagos.artifacts.Resultado
+     *     returns co.edu.javeriana.aes.modval.pagos.artifacts.Resultado
      */
     @WebMethod(operationName = "Compensar", action = "compensar")
     @WebResult(name = "Resultado", targetNamespace = "http://www.servicios.co/pagos/schemas", partName = "Input")

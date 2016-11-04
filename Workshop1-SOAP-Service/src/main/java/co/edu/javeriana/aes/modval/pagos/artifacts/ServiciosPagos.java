@@ -1,5 +1,5 @@
 
-package co.edu.javeriana.aes.modaval.pagos.artifacts;
+package co.edu.javeriana.aes.modval.pagos.artifacts;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "ServiciosPagos", targetNamespace = "http://www.servicios.co/pagos/service", wsdlLocation = "file:/Users/gersuare/MyProjects/UJaveriana-AES-ModVal/Workshop1-SOAP-Service/src/main/resources/co/edu/javeriana/aes/modaval/pagos.wsdl")
+@WebServiceClient(name = "ServiciosPagos", targetNamespace = "http://www.servicios.co/pagos/service", wsdlLocation = "file:/Users/gersua/Projects/UJaveriana-AES-ModVal/Workshop1-SOAP-Service/src/main/resources/co/edu/javeriana/aes/modval/pagos.wsdl")
 public class ServiciosPagos
     extends Service
 {
@@ -30,7 +30,7 @@ public class ServiciosPagos
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/Users/gersuare/MyProjects/UJaveriana-AES-ModVal/Workshop1-SOAP-Service/src/main/resources/co/edu/javeriana/aes/modaval/pagos.wsdl");
+            url = new URL("file:/Users/gersua/Projects/UJaveriana-AES-ModVal/Workshop1-SOAP-Service/src/main/resources/co/edu/javeriana/aes/modval/pagos.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

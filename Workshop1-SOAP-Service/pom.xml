@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>co.edu.javeriana.aes.modaval</groupId>
+    <groupId>co.edu.javeriana.aes.modval</groupId>
     <artifactId>Workshop1-SOAP-Service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
