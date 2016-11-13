@@ -1,0 +1,57 @@
+#%RAML 1.0
+title: Servicio ETB | Agua
+mediaType: application/json
+baseUri: http://www.myservicio.co/servicios/pagos/{version}
+version: v1
+
+
+/payments/{idFactura}:
+   get:
+       description: Retorna la cantidad a pagar de la factura dependiendo del idFactura
+       responses:
+           200:
+               body:
+                  application/json:
+                           properties:
+                             idFactura: number
+                             valorFactura: number
+           404:
+               description: La factura no existe
+   post:
+       description: Permite realizar el pago de la factura existente
+       body:
+          application/json:
+            properties:
+              valorFactura: number
+       responses:
+           200:
+               body:
+                   application/json:
+                     properties:
+                        idFactura: number
+                        mensajeOK: string
+           404:
+               body:
+                   application/json:
+                     properties:
+                       idFactura:number
+                       mensajeBad:string
+   delete:
+       description: Permite compensar el pago de la factura existente
+       body:
+         application/json:
+           properties:
+             valorFactura: number
+       responses:
+           200:
+               body:
+                   application/json:
+                     properties:
+                       idFactura: number
+                       mensajeOK: string
+           404:
+               body:
+                   application/json:
+                          properties:
+                            idFactura: number
+                            mensajeBad: string
