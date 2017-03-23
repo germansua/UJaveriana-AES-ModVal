@@ -4,19 +4,22 @@ MAINTAINER gersua@gmail.com
 # Update repositories
 RUN apt-get update -y && apt-get upgrade -y
 # Install OpenJDK8
-RUN apt-get install openjdk-8-jdk -y && apt-get install curl -y && apt-get install unzip
+RUN apt-get install openjdk-8-jdk -y && \
+    apt-get install curl -y && \
+    apt-get install unzip
 
-ENV PAYARA_HOME /opt/payara41/glassfish
+ENV WORKSPACE /opt
+ENV PAYARA_HOME ${WORKSPACE}/payara41/glassfish
 ENV PAYARA_BIN ${PAYARA_HOME}/bin
 
-WORKDIR /opt
-RUN mkdir to_depoy
+WORKDIR ${WORKSPACE}
 
 RUN curl -o payara.zip -L http://bit.ly/2nDuLPc
 RUN unzip payara.zip
+COPY target/worshop1-soap-service.war .
 
-ENTRYPOINT  ${PAYARA_BIN}/asadmin start-domian domain1 && \
-            ${PAYARA_BIN}/asadmin depoy /opt/to_deploy && \
+ENTRYPOINT  ${PAYARA_BIN}/asadmin start-domain domain1 && \
+            ${PAYARA_BIN}/asadmin deploy ${WORKSPACE}/worshop1-soap-service.war && \
             tail -f ${PAYARA_HOME}/domains/domain1/logs/server.log
 
 EXPOSE 8080 4848
