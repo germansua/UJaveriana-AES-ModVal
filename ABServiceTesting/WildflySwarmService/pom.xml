@@ -29,7 +29,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>demo</finalName>
+        <finalName>wildfly-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.wildfly.swarm</groupId>
