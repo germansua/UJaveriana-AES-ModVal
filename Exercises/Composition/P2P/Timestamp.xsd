@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		xmlns:tns="http://www.javeriana.edu.co/aes/modval/services"
+		targetNamespace="http://www.javeriana.edu.co/aes/modval/services">
+
+		<element name="Timestamp" type="tns:Timestamp"/>
+
+		<complexType name="Timestamp">
+			<sequence>
+				<element name="currentTS" type="long"/>
+			</sequence>
+		</complexType>
+</schema>
