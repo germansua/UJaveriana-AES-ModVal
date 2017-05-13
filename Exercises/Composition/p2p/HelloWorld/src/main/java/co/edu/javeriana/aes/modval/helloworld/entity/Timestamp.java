@@ -1,4 +1,4 @@
-package co.edu.javeriana.aes.modval.timestamp.entity;
+package co.edu.javeriana.aes.modval.helloworld.entity;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Auto-generated class based on the canonical representation for Timestamp
- * xjc -d Timestamp/src/main/java/co/edu/javeriana/aes/modval/timestamp/entity
- * -p co.edu.javeriana.aes.modval.timestamp.entity Timestamp.xsd
+ * xjc -d HelloWorld/src/main/java/co/edu/javeriana/aes/modval/helloworld/entity
+ * -p co.edu.javeriana.aes.modval.helloworld.entity Timestamp.xsd
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -31,12 +31,5 @@ public class Timestamp {
      */
     public long getCurrentTS() {
         return currentTS;
-    }
-
-    @Override
-    public String toString() {
-        return "Timestamp{" +
-                "currentTS=" + currentTS +
-                '}';
     }
 }

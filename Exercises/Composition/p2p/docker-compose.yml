@@ -1,0 +1,19 @@
+version: '3'
+services:
+  timestamp:
+    build: "Timestamp/."
+    ports: 
+      - "9090:8080"
+    networks: 
+      - "service-compose-net"
+  helloworld:
+    build: "HelloWorld/."
+    ports:
+      - "8080:8080"
+    networks: 
+      - "service-compose-net"
+    depends_on:
+      - timestamp
+networks:
+  service-compose-net:
+    driver: bridge

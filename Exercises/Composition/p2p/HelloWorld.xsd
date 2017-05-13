@@ -4,9 +4,9 @@
 		xmlns:tns="http://www.javeriana.edu.co/aes/modval/services"
 		targetNamespace="http://www.javeriana.edu.co/aes/modval/services">
 
-		<complexType name="Timestamp">
+		<complexType name="HelloWorld">
 			<sequence>
-				<element name="currentTS" type="long" />
+				<element name="greeting" type="string" />
 			</sequence>
 		</complexType>
 </schema>

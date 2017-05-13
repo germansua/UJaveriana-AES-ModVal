@@ -9,7 +9,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-/* Represents a boundary or protocol adaptor. In this case an adaptor to a REST like service */
+/**
+ * This class represents the resource. It is also consider the boundary or protocol adaptor.
+ * In this case an adaptor to a REST like service
+ * */
 @Path("ts")
 public class TimestampResource {
 
@@ -19,7 +22,7 @@ public class TimestampResource {
 
     /* This supports GET HTTP verb/method, and two representations for the resource: XML and JSON */
     @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Timestamp doGet() {
         return timestampService.getCurrentTimestamp();
     }
