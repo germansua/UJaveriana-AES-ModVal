@@ -17,7 +17,7 @@
     </properties>
 
     <build>
-        <finalName>worshop1-soap-service</finalName>
+        <finalName>w1-soap-svr</finalName>
     </build>
 
     <dependencies>

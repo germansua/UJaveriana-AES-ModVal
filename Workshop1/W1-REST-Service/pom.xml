@@ -30,7 +30,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>workshop1-rest-service</finalName>
+        <finalName>w1-rest-svr</finalName>
         <plugins>
             <plugin>
                 <groupId>org.wildfly.swarm</groupId>
