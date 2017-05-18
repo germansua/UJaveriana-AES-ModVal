@@ -1,0 +1,10 @@
+version: '3'
+services:
+  rest:
+    build: "W1-REST-Service/."
+    ports:
+      - "9090:8080"
+  soap:
+    build: "W1-SOAP-Service/."
+    ports:
+      - "7070:8080"
