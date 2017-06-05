@@ -1,0 +1,17 @@
+version: '3'
+services:
+  java-rmi-server:
+    build: "RMIServer/."
+    ports:
+      - "7875:7875"
+    networks:
+      - "rmi-java-net"
+  java-rmi-client:
+    build: "RMIClient/."
+    networks:
+      - "rmi-java-net"
+    depends_on:
+      - "java-rmi-server"
+networks:
+  rmi-java-net:
+    driver: bridge
