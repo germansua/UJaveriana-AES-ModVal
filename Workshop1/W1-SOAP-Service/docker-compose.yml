@@ -1,0 +1,24 @@
+version: "3.1"
+services:
+  web-services:
+    build: "Payara/."
+    ports:
+      - 7080:8080
+      - 3848:4848
+    depends_on: 
+      - domiciliaciondb
+    networks: 
+      - gas-provider-net
+  domiciliaciondb:
+    build: "MariaDB/."
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+    volumes:
+      - $HOME/data/mariadb/domiciliaciondb:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks: 
+      - gas-provider-net
+networks:
+  gas-provider-net:
+    driver: bridge

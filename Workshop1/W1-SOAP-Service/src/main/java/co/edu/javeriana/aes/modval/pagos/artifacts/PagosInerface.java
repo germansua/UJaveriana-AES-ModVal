@@ -44,7 +44,7 @@ public interface PagosInerface {
     @WebMethod(operationName = "Pagar", action = "pagar")
     @WebResult(name = "Resultado", targetNamespace = "http://www.servicios.co/pagos/schemas", partName = "Input")
     public Resultado pagar(
-        @WebParam(name = "Pago", targetNamespace = "http://www.servicios.co/pagos/schemas", partName = "Input")
+        @WebParam(name = "PagoResource", targetNamespace = "http://www.servicios.co/pagos/schemas", partName = "Input")
         Pago input);
 
     /**
@@ -56,7 +56,7 @@ public interface PagosInerface {
     @WebMethod(operationName = "Compensar", action = "compensar")
     @WebResult(name = "Resultado", targetNamespace = "http://www.servicios.co/pagos/schemas", partName = "Input")
     public Resultado compensar(
-        @WebParam(name = "Pago", targetNamespace = "http://www.servicios.co/pagos/schemas", partName = "Input")
+        @WebParam(name = "PagoResource", targetNamespace = "http://www.servicios.co/pagos/schemas", partName = "Input")
         Pago input);
 
 }

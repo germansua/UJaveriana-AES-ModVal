@@ -1,19 +1,30 @@
 package co.edu.javeriana.aes.modval.pagos.boundary;
 
 import co.edu.javeriana.aes.modval.pagos.artifacts.*;
+import co.edu.javeriana.aes.modval.pagos.control.FacturasControl;
+import co.edu.javeriana.aes.modval.pagos.entities.Facturas;
+import co.edu.javeriana.aes.modval.pagos.exceptions.FacturaInvalidaException;
 
+import javax.inject.Inject;
 import javax.jws.WebService;
-import java.util.Random;
 
 @WebService(endpointInterface = "co.edu.javeriana.aes.modval.pagos.artifacts.PagosInerface")
 public class PagosService implements PagosInerface {
 
+    @Inject
+    private FacturasControl control;
+
     @Override
-    public ResultadoConsulta cosultar(ReferenciaFactura referenciaFactura) {
+    public ResultadoConsulta cosultar(ReferenciaFactura referenciaFactura) throws FacturaInvalidaException {
+        Facturas factura = control.getFacturaByReferencia(referenciaFactura.getReferenciaFactura());
+
+        if (factura == null) {
+            throw new FacturaInvalidaException();
+        }
 
         ResultadoConsulta resultado = new ResultadoConsulta();
-        resultado.setReferenciaFactura(new ReferenciaFactura(referenciaFactura.getReferenciaFactura()));
-        resultado.setTotalPagar(new Random().nextDouble() * 100000);
+        resultado.setReferenciaFactura(new ReferenciaFactura(factura.getReferencia()));
+        resultado.setTotalPagar(factura.getValor());
 
         return resultado;
     }

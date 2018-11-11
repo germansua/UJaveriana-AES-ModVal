@@ -27,7 +27,7 @@ public class ObjectFactory {
     private final static QName _ReferenciaFactura_QNAME = new QName("http://www.servicios.co/pagos/schemas", "ReferenciaFactura");
     private final static QName _Resultado_QNAME = new QName("http://www.servicios.co/pagos/schemas", "Resultado");
     private final static QName _ResultadoConsulta_QNAME = new QName("http://www.servicios.co/pagos/schemas", "ResultadoConsulta");
-    private final static QName _Pago_QNAME = new QName("http://www.servicios.co/pagos/schemas", "Pago");
+    private final static QName _Pago_QNAME = new QName("http://www.servicios.co/pagos/schemas", "PagoResource");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: co.edu.javeriana.aes.modval.pagos.artifacts
@@ -99,7 +99,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link Pago }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://www.servicios.co/pagos/schemas", name = "Pago")
+    @XmlElementDecl(namespace = "http://www.servicios.co/pagos/schemas", name = "PagoResource")
     public JAXBElement<Pago> createPago(Pago value) {
         return new JAXBElement<Pago>(_Pago_QNAME, Pago.class, null, value);
     }

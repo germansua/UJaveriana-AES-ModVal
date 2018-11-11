@@ -1,3 +1,5 @@
+#!/bin/bash
 mvn clean package
-docker build -t w1-soap-svr .
-docker run -d -p 7070:8080 --name w1-soap-svr w1-soap-svr
+cp target/gas-natural.war Payara/
+docker-compose up --build -d
+rm Payara/gas-natural.war
