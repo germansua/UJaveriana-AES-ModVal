@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.jws.WebService;
 
 @WebService(endpointInterface = "co.edu.javeriana.aes.modval.pagos.artifacts.PagosInerface")
-public class PagosService implements PagosInerface {
+public class Pagos implements PagosInerface {
 
     @Inject
     private FacturasControl control;
@@ -30,22 +30,32 @@ public class PagosService implements PagosInerface {
     }
 
     @Override
-    public Resultado pagar(Pago pago) {
-
+    public Resultado pagar(Pago pago) throws FacturaInvalidaException {
+        ResultadoConsulta resultadoConsulta = cosultar(pago.getReferenciaFactura());
         Resultado resultado = new Resultado();
-        resultado.setReferenciaFactura( pago.getReferenciaFactura() );
-        resultado.setMensaje("Factura Pagada Exitosamente");
-
+        resultado.setReferenciaFactura(pago.getReferenciaFactura());
+        
+        if (control.pagarFactura(resultadoConsulta.getReferenciaFactura().getReferenciaFactura())) {
+            resultado.setMensaje("Factura Pagada Exitosamente");
+        } else {
+            resultado.setMensaje("Hubo un problema durante el pago de la factura");
+        }
+        
         return resultado;
     }
 
     @Override
-    public Resultado compensar(Pago pago) {
-
+    public Resultado compensar(Pago pago) throws FacturaInvalidaException {
+        ResultadoConsulta resultadoConsulta = cosultar(pago.getReferenciaFactura());
         Resultado resultado = new Resultado();
-        resultado.setReferenciaFactura( pago.getReferenciaFactura() );
-        resultado.setMensaje("Compensado Exitosamente");
-
+        resultado.setReferenciaFactura(pago.getReferenciaFactura());
+        
+        if (control.compensarFactura(resultadoConsulta.getReferenciaFactura().getReferenciaFactura())) {
+            resultado.setMensaje("Factura Compensada Exitosamente");
+        } else {
+            resultado.setMensaje("Hubo un problema durante el pago de la factura");
+        }
+        
         return resultado;
     }
 }

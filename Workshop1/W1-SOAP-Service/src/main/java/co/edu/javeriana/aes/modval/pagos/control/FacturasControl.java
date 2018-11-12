@@ -1,5 +1,7 @@
 package co.edu.javeriana.aes.modval.pagos.control;
 
+import co.edu.javeriana.aes.modval.pagos.entities.Estados;
+import co.edu.javeriana.aes.modval.pagos.entities.EstadosValidos;
 import co.edu.javeriana.aes.modval.pagos.entities.Facturas;
 
 import javax.ejb.LocalBean;
@@ -35,5 +37,31 @@ public class FacturasControl {
         }
 
         return result;
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public boolean pagarFactura(@NotNull String referencia) {
+        Facturas factura = getFacturaByReferencia(referencia);
+       
+        boolean validation = factura.getEstado().getEstado().equals(EstadosValidos.PAGADA);
+        if (!validation) {
+            factura.setEstado(new Estados(EstadosValidos.PAGADA));
+        }
+        
+        return !validation;
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public boolean compensarFactura(@NotNull String referencia) {
+        Facturas factura = getFacturaByReferencia(referencia);
+        
+        EstadosValidos estadoActual = factura.getEstado().getEstado();
+        
+        boolean validation = estadoActual.equals(EstadosValidos.PAGADA);
+        if (validation) {
+            factura.setEstado(new Estados(EstadosValidos.PENDIENTE));
+        }
+        
+        return validation;
     }
 }

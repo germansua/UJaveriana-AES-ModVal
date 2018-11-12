@@ -1,7 +1,7 @@
 ###_SOAP Payment Service a.k.a. Gas Natural Payment Service_
 
 This service represents the functionality for one of the third party services for the workshop challenge.
-The service has been updated to support new features like storing in a database the invoices and manage their states.
+The service has been updated to support new features like storing in a database the invoices and managing their states.
 Moreover, all the infrastructure requirements have been updated as well, updating the docker images among other things.
 
 #####_Feature updates_
@@ -9,27 +9,30 @@ Moreover, all the infrastructure requirements have been updated as well, updatin
 - New business logic that supports a more realistic operations on the invoices  
 
 #####_Infrastructure updates_
-- Dockerfile updates for using official **Payara Server** images
-- MariaDB as a Database
+- Dockerfile updates for using official **Payara Full Server** images
+- MariaDB as a Database Engine
+- All docker images wrapped into a `docker-compose.yml` file
+- `startup.sh` and `shutdown.sh` scripts for starting and ending the docker processes
 
 #####_How to run the project_
+Just go to your terminal and run `startup.sh`. That script will perform all the necessary steps to run the docker images.
+
+Please bear in mind the requiriments describe below to run the project locally.
+
+[**Docker multi-stage builds**](https://docs.docker.com/develop/develop-images/multistage-build/) will be supported soon.
+ 
+  
+
+#####_Important Things to Consider_
+- In order to build the project locally, make sure JDK8 and Maven are installed and configured in the path.
+- Both `pagos.wsdl` and `pagos.xml` schema are under the **_contract_** folder. These are the governance elements used to create the web service artifacts  
+- The server generated WSLD base on above artifacts can be found at [**http://localhost:8080/gas-natural/PagosService?wsdl**](http://localhost:8080/gas-natural/PagosService?wsdl). This way the SOAP Web Service consumers can be created
+- The application is running on top of [**Payara Full Server**](https://www.payara.fish/) Application Server  
+- [**MariaDB**](https://mariadb.org/) is exposed externally for access at `localhost:3306`. User and password information can be find in the docker files. [**MySQLWorkbench**](https://www.mysql.com/products/workbench/) can be used for connecting and querying the data.
+- The Database is full filled by a script at startup with about 10K records
+- A [**soapUI**](https://www.soapui.org/downloads/soapui.html) project called `gas-natural-soapui-project.xml` has been added for testing pruposes  
 
 -----
-
-###SOAP Payment Service (Legacy Doc)
-
-In order to build and run this project, please:
-
-1. Checkout the project
-2. Download a JavaEE7 application server that supports WebProfile. Code here was tested using [Payara Server](http://www.payara.fish/downloads)
-3. Go to the Project folder and run: `mvn clean install`
-4. Go to the AppServer folder and run it (For Payara): `bin/asadmin start-domain domain1`
-5. Deploy de App (For Payara): `bin/asadmin deploy $PATH_TO_APP/UJaveriana-AES-ModVal/Workshop1-SOAP-Service/target/Workshop1-SOAP-Service-1.0-SNAPSHOT.war` 
-6. Verify the application has been deployed (For Payara): `bin/asadmin list-applications`
-7. Go to the [WSDL Contract](http://localhost:8080/Workshop1-SOAP-Service-1.0-SNAPSHOT/PagosServiceService?wsdl) in your browser to see resulting the WSDL
-8. Open the soapUI attached project
-9. Run your tests!!! 
-
 The WSDL and XSD used in this project were generated with the **_"contract first"_** strategy in mind. If you want to generate your own artifacts from Java you can:
 
 1. Go to the Project Folder

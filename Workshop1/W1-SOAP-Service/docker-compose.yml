@@ -3,8 +3,8 @@ services:
   web-services:
     build: "Payara/."
     ports:
-      - 7080:8080
-      - 3848:4848
+      - 8080:8080
+      - 4848:4848
     depends_on: 
       - domiciliaciondb
     networks: 

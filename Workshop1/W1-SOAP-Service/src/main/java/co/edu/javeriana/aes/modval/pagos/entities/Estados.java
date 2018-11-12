@@ -25,6 +25,11 @@ public class Estados implements Serializable {
     public Estados() {
     }
 
+    public Estados(EstadosValidos estado) {
+        this.id = estado.getValue();
+        this.estado = estado;
+    }
+    
     public int getId() {
         return id;
     }

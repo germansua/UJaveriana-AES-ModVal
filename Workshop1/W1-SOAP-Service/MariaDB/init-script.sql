@@ -11,9 +11,9 @@ SET @estados_count = (SELECT COUNT(id) FROM Estados);
 DELIMITER $
 BEGIN NOT ATOMIC
     IF @estados_count = 0 THEN 
-		INSERT INTO Estados(estado) VALUES ("SIN_PAGAR");
-		INSERT INTO Estados(estado) VALUES ("PENDIENTE");
-		INSERT INTO Estados(estado) VALUES ("PAGADA");
+      INSERT INTO Estados(estado) VALUES ("SIN_PAGAR");
+      INSERT INTO Estados(estado) VALUES ("PENDIENTE");
+      INSERT INTO Estados(estado) VALUES ("PAGADA");
     END IF;
 END $
 DELIMITER ;
