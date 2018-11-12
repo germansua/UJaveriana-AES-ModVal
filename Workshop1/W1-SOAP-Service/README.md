@@ -1,20 +1,20 @@
-##_SOAP Payment Service a.k.a. Gas Natural Payment Service_
+##SOAP Payment Service a.k.a. Gas Natural Payment Service
 
 This service represents the functionality for one of the third party services for the workshop challenge.
 The service has been updated to support new features like storing in a database the invoices and managing their states.
 Moreover, all the infrastructure requirements have been updated as well, updating the docker images among other things.
 
-####_Feature updates_
+####Feature updates
 - Invoices are now stored in a MariaDB database, which can keep the status of each one
 - New business logic that supports a more realistic operations on the invoices  
 
-####_Infrastructure updates_
+####Infrastructure updates
 - Dockerfile updates for using official **Payara Full Server** images
 - MariaDB as a Database Engine
 - All docker images wrapped into a `docker-compose.yml` file
 - `startup.sh` and `shutdown.sh` scripts for starting and ending the docker processes
 
-####_How to run the project_
+####How to run the project
 Just go to your terminal and run `startup.sh`. That script will perform all the necessary steps to run the docker images.
 
 Please bear in mind the requiriments describe below to run the project locally.
@@ -23,7 +23,7 @@ Please bear in mind the requiriments describe below to run the project locally.
  
   
 
-####_Important Things to Consider_
+####Important Things to Consider
 - In order to build the project locally, make sure JDK8 and Maven are installed and configured in the path.
 - Both `pagos.wsdl` and `pagos.xml` schema are under the **_contract_** folder. These are the governance elements used to create the web service artifacts  
 - The server generated WSLD base on above artifacts can be found at [**http://localhost:8080/gas-natural/PagosService?wsdl**](http://localhost:8080/gas-natural/PagosService?wsdl). This way the SOAP Web Service consumers can be created
