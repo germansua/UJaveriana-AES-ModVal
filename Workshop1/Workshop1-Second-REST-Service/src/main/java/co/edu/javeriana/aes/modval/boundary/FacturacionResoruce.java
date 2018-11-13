@@ -1,16 +1,24 @@
 package co.edu.javeriana.aes.modval.boundary;
 
 import co.edu.javeriana.aes.modval.control.Factura;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+
+import javax.ws.rs.*;
 
 @Path("facturacion")
 public class FacturacionResoruce {
     
     @GET
-    @Path("{referencia-pago}")
-    public Factura getFactura(@PathParam("referencia-pago") String referenciaPago) {
+    public Factura obtenerFactura(@QueryParam("referencia-pago") String referenciaPago) {
+        return new Factura();
+    }
+
+    @POST
+    public Factura pagarFactura(@QueryParam("referencia-pago") String referenciaPago) {
+        return new Factura();
+    }
+
+    @PUT
+    public Factura compensarFactura(@QueryParam("referencia-pago") String referenciaPago) {
         return new Factura();
     }
 }

@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://json-schema.org/draft-07/schema#",
+  "title": "Esquema para errores en procesamiento de Facturas",
+  "type": "object",
+  "properties": {
+    "descripcion": {
+      "type": "string"
+    },
+    "codigo": {
+      "type": "number"
+    }
+  },
+  "required": ["descripcion", "codigo"],
+  "additionalProperties": false
+}
