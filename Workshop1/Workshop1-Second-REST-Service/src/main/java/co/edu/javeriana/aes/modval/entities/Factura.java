@@ -1,4 +1,4 @@
-package co.edu.javeriana.aes.modval.control;
+package co.edu.javeriana.aes.modval.entities;
 
 public class Factura {
     
@@ -11,7 +11,10 @@ public class Factura {
     private Double valorReferencia;
     private FacturaEstados estadoReferencia;
 
-    public Factura() {
+    public Factura(String referenciaPago, Double valorReferencia, FacturaEstados estadoReferencia) {
+        this.referenciaPago = referenciaPago;
+        this.valorReferencia = valorReferencia;
+        this.estadoReferencia = estadoReferencia;
     }
 
     public String getReferenciaPago() {

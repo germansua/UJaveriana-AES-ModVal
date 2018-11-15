@@ -28,7 +28,14 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-        
+
+        <!-- MongoDB Driver -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+
         <!-- Test Dependencies -->
         <dependency>
             <groupId>junit</groupId>
