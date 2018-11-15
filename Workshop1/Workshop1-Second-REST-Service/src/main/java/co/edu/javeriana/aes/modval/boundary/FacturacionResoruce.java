@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Random;
 
 @Path("facturacion")
 public class FacturacionResoruce {
@@ -17,18 +18,18 @@ public class FacturacionResoruce {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Factura obtenerFactura(@QueryParam("referencia-pago") @NotNull String referenciaPago) {
-        return control.findByReferencia(referenciaPago);
+        return new Factura(referenciaPago, new Random().nextDouble() * 100000, Factura.FacturaEstados.SIN_PAGAR);
     }
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     public Factura pagarFactura(@QueryParam("referencia-pago") @NotNull String referenciaPago) {
-        return new Factura("FACTURA", 123.21, Factura.FacturaEstados.SIN_PAGAR);
+        return new Factura(referenciaPago, new Random().nextDouble() * 100000, Factura.FacturaEstados.PAGADA);
     }
 
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     public Factura compensarFactura(@QueryParam("referencia-pago") @NotNull String referenciaPago) {
-        return new Factura("FACTURA", 123.21, Factura.FacturaEstados.SIN_PAGAR);
+        return new Factura(referenciaPago, new Random().nextDouble() * 100000, Factura.FacturaEstados.SIN_PAGAR);
     }
 }
