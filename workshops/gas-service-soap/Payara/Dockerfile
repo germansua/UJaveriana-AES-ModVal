@@ -1,8 +1,9 @@
 # Build Stage
 FROM maven:3.6.1-jdk-8 AS builder
-WORKDIR /WaterService
-COPY ./src ./src
+WORKDIR /GasService
 COPY pom.xml .
+RUN mvn dependency:go-offline -B
+COPY ./src ./src
 RUN mvn clean package
 
 # Run Stage
@@ -19,7 +20,7 @@ RUN wget --quiet https://bit.ly/2Or4ltp -O ${MARIADB_DRIVER} && mv ${MARIADB_DRI
 RUN echo ${JDBC_CONNECTION_POOL_CMD} > ${POSTBOOT_COMMANDS} && \ 
     echo ${JDBC_RESOURCE_CMD} >> ${POSTBOOT_COMMANDS}
 
-COPY --from=builder /WaterService/target/gas-service.war ${DEPLOY_DIR}
+COPY --from=builder /GasService/target/gas-service.war ${DEPLOY_DIR}
 
 ENTRYPOINT  ${PAYARA_PATH}/generate_deploy_commands.sh && \
             ${PAYARA_PATH}/bin/startInForeground.sh \
