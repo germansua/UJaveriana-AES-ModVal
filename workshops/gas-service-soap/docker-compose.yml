@@ -1,7 +1,9 @@
 version: "3.1"
 services:
   web-services:
-    build: "Payara/."
+    build:
+      context: .
+      dockerfile: "Payara/Dockerfile"
     ports:
       - 8080:8080
       - 4848:4848

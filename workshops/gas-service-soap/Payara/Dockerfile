@@ -1,5 +1,13 @@
+# Build Stage
+FROM maven:3.6.1-jdk-8 AS builder
+WORKDIR /WaterService
+COPY ./src ./src
+COPY pom.xml .
+RUN mvn clean package
+
+# Run Stage
 FROM payara/server-full:5.183
-LABEL AUTHOR="German Alonso Suarez Guerrero - gersua@mail.com"
+LABEL maintainer="German Alonso Suarez Guerrero - german.suarez@javeriana.edu.co"
 
 ENV MARIADB_HOST domiciliaciondb
 ENV LIBS /opt/payara5/glassfish/domains/domain1/lib
@@ -11,7 +19,7 @@ RUN wget --quiet https://bit.ly/2Or4ltp -O ${MARIADB_DRIVER} && mv ${MARIADB_DRI
 RUN echo ${JDBC_CONNECTION_POOL_CMD} > ${POSTBOOT_COMMANDS} && \ 
     echo ${JDBC_RESOURCE_CMD} >> ${POSTBOOT_COMMANDS}
 
-COPY gas-natural.war ${DEPLOY_DIR}
+COPY --from=builder /WaterService/target/gas-service.war ${DEPLOY_DIR}
 
 ENTRYPOINT  ${PAYARA_PATH}/generate_deploy_commands.sh && \
             ${PAYARA_PATH}/bin/startInForeground.sh \

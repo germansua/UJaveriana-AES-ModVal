@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>co.edu.javeriana.aes.modval</groupId>
-    <artifactId>Workshop1-SOAP-Service</artifactId>
+    <artifactId>gas-service-soap</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Workshop1-SOAP-Service</name>
+    <name>gas-service-soap</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +17,7 @@
     </properties>
 
     <build>
-        <finalName>gas-natural</finalName>
+        <finalName>gas-service</finalName>
     </build>
 
     <dependencies>

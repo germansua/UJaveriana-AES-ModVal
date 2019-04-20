@@ -1,5 +1,5 @@
 #%RAML 1.0
-title: Servicio ETB | Agua
+title: Water Service
 mediaType: application/json
 baseUri: http://www.myservicio.co/servicios/pagos/{version}
 version: v1
@@ -34,8 +34,8 @@ version: v1
                body:
                    application/json:
                      properties:
-                       idFactura:number
-                       mensajeBad:string
+                       idFactura: number
+                       mensajeBad: string
    delete:
        description: Permite compensar el pago de la factura existente
        body:
