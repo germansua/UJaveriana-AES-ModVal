@@ -1,0 +1,30 @@
+{
+    "$id": "http://www.javeriana.edu.co/aes/modval/workshops",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "factura",
+    "type": "object",
+    "properties": {
+        "fid": {
+            "type": "string",
+            "description": "Representa el id de la factura, comenzado con las letras ABCD seguidas de un número de 5 digitos"
+        },
+        "fecha_pago_oportuno": {
+            "type": "string",
+            "description": "Representa la fecha de pago oportuno en formato yyyy-mm-dd"
+        },
+        "info_pago": {
+            "type": "object",
+            "properties": {
+                "valor": {
+                    "type": "number",
+                    "description": "Valor a pagar de la factura"
+                },
+                "estado": {
+                    "type": "string",
+                    "description": "Estado actual de la factura: PAGADA | PENDIENTE"
+                }
+            }
+        }
+    },
+    "required": ["fid", "info_pago"]
+}
