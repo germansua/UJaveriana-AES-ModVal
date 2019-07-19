@@ -7,7 +7,7 @@ import java.util.zip.GZIPOutputStream;
 
 public class Main {
 
-    private static final int BUFFER_SIZE = 4096;
+    private static final int BUFFER_SIZE = 256;
 
     public static void main(String[] args) {
 
@@ -36,7 +36,7 @@ public class Main {
                 new File(Paths.get(args[0]).normalize().toAbsolutePath().getParent().toFile(), Paths.get(args[0]).normalize().getFileName() + ".gz"))) {
             for (byte b : baos.toByteArray()) {
                 fos.write(b);
-                //fos.flush();
+                fos.flush();
             }
         } catch (IOException ex) {
             System.out.println("An error occurred while processing the output file: " + ex);
