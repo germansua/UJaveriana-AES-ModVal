@@ -2,7 +2,7 @@ package co.edu.javeriana.pica.jvm.performance.mls;
 
 public class MyKey {
 
-    public final String key;
+    protected final String key;
 
     public MyKey(String key) {
         this.key = key;

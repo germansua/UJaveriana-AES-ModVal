@@ -6,22 +6,26 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException ex) {
-        }
         System.out.println("Starting...");
 
-        Map<MyKey, String> myMap = new HashMap<>();
         int index = 0;
+        boolean hasArgs = args.length > 0;
+        Map<MyKey, String> myMap = new HashMap<>();
 
         while (true) {
-            myMap.put(new MyKey("key"), "value");
+            if (!hasArgs) {
+                myMap.put(new MyKey("key"), "value");
+            } else {
+                myMap.put(new MyFixedKey("key"), "value");
+            }
 
             if (index++ % 1000 == 0) {
                 System.out.println("Elements in map: " + myMap.size());
+                double freeMem = (double) Runtime.getRuntime().freeMemory() / 1_048_576;
+                System.out.printf("Free Memory: %.2f%n", freeMem);
+
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {
                 }
             }

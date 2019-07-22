@@ -1,3 +1,3 @@
 #!/bin/bash
 ./gradlew clean build
-java -Xms64m -Xmx64m -jar build/libs/memory-leak-simulation.jar
+java -Xms24m -Xmx24m -jar build/libs/memory-leak-simulation.jar $1
