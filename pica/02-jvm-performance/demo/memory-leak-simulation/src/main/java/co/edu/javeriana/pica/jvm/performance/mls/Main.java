@@ -22,7 +22,7 @@ public class Main {
             if (index++ % 1000 == 0) {
                 System.out.println("Elements in map: " + myMap.size());
                 double freeMem = (double) Runtime.getRuntime().freeMemory() / 1_048_576;
-                System.out.printf("Free Memory: %.2f%n", freeMem);
+                System.out.printf("Free Memory: %.2f MBs%n", freeMem);
 
                 try {
                     Thread.sleep(100);

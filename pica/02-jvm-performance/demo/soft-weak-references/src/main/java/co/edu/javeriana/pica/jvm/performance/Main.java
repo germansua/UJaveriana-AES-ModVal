@@ -20,7 +20,7 @@ public class Main {
         List<Object> strongReferenceList = new ArrayList<>();
         IntStream.range(0, iterations)
                 .forEach(i -> {
-                    strongReferenceList.add(new SoftReference<>(new Object()));
+                    strongReferenceList.add(new Object());
                     if (i % sizeModule == 0) {
                         System.out.println("List size: " + strongReferenceList.size());
                     }

@@ -1,4 +1,5 @@
 #!/bin/bash
+export JAVA_TOOL_OPTIONS="-XX:+FlightRecorder"
 
 if [ $# -ne 2 ]; then
     echo "Invalid number of params, necessary 2, factorial and stack size option"
