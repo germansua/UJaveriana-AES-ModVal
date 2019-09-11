@@ -21,11 +21,20 @@ public final class RGB {
         this.blue = blue;
     }
 
-    public RGB aaverage(RGB other) {
-        return new RGB((this.alpha + other.alpha) / 2,
-                (this.red + other.red) / 2,
-                (this.green + other.green) / 2,
-                (this.blue + other.blue) / 2);
+    public int getAlpha() {
+        return alpha;
+    }
+
+    public int getRed() {
+        return red;
+    }
+
+    public int getGreen() {
+        return green;
+    }
+
+    public int getBlue() {
+        return blue;
     }
 
     public int getRBGAsInteger() {

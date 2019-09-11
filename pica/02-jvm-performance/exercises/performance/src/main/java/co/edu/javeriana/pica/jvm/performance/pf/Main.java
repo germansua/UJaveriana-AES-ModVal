@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        BufferedImage srcImage = ImageIO.read(new File("/Users/gersua/Desktop/img2.png"));
+        BufferedImage srcImage = ImageIO.read(new File("/Users/gersua/Desktop/beach-bird-s-eye-view-coast-50594.jpg"));
         int with = srcImage.getWidth();
         int height = srcImage.getHeight();
 
