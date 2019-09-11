@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:27.0.1-jre'
+    testImplementation 'junit:junit:4.12'
+}
+
+mainClassName = 'co.edu.javeriana.pica.jvm.performance.pf.Main'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'co.edu.javeriana.pica.jvm.performance.pf.Main'
+    }
+}
