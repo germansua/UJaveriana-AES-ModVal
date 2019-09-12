@@ -3,27 +3,34 @@ package co.edu.javeriana.pica.jvm.performance.pf;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.List;
+import java.time.Instant;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        BufferedImage srcImage = ImageIO.read(new File("/Users/gersua/Desktop/beach-bird-s-eye-view-coast-50594.jpg"));
-        int with = srcImage.getWidth();
-        int height = srcImage.getHeight();
-
-        BufferedImage dstImage = new BufferedImage(with, height, BufferedImage.TYPE_INT_ARGB);
-
-        for (int x = 0; x < with; x++) {
-            for (int y = 0; y < height; y++) {
-                RGB pixel = new RGB(srcImage.getRGB(x, y));
-                List<RGB> neighborPixels = NeighborPixels.getNeighborPixels(1, srcImage, x, y);
-                RGB newPixel = BlurPixel.blur(pixel, neighborPixels);
-                dstImage.setRGB(x, y, newPixel.getRBGAsInteger());
-            }
+        if (args.length != 1) {
+            System.err.println("Invalid number of arguments, expected path to an Image File!");
+            System.exit(-1);
         }
 
-        ImageIO.write(dstImage, "png", new File("/Users/gersua/Desktop/blur.png"));
+        File srcFile = new File(args[0]);
+        if (!srcFile.exists()) {
+            System.err.printf("The file %s does not exists!", args[0]);
+            System.exit(-1);
+        }
+
+        System.out.println("Starting...");
+        File dstFile = new File(srcFile.getParent(), "blur.png");
+        BufferedImage srcImage = ImageIO.read(srcFile);
+
+        Instant startingTime = Instant.now();
+        BufferedImage dstImage = ProcessImage.process(srcImage);
+        Instant finalTime = Instant.now();
+        System.out.printf("Total Processed Time: %d seconds %n", finalTime.getEpochSecond() - startingTime.getEpochSecond());
+
+        System.out.println("Writing Image to disk...");
+        ImageIO.write(dstImage, "png", dstFile);
+        System.out.println("Finish");
     }
 }

@@ -2,6 +2,8 @@ package co.edu.javeriana.pica.jvm.performance.pf;
 
 import org.junit.Test;
 
+import java.util.stream.IntStream;
+
 import static org.junit.Assert.*;
 
 public class PointTest {
