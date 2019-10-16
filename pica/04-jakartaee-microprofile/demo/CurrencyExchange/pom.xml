@@ -44,6 +44,6 @@
     </dependencies>
 
     <build>
-        <finalName>mp-test</finalName>
+        <finalName>CurrencyExchange</finalName>
     </build>
 </project>
