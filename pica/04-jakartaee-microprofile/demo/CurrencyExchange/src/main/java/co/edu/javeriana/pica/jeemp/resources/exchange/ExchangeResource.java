@@ -1,4 +1,4 @@
-package co.edu.javeriana.pica.jeemp.resources;
+package co.edu.javeriana.pica.jeemp.resources.exchange;
 
 import javax.inject.Inject;
 import javax.json.Json;
@@ -18,6 +18,7 @@ public class ExchangeResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject getExchangeRate(@QueryParam("currency") String currency, @QueryParam("value") double value) {
+        currency = currency != null ? currency : Currencies.USD.toString();
         return Json.createObjectBuilder()
                 .add("to", currency)
                 .add("newValue", exchangeService.exchangeUSDTo(currency, value))

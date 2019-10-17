@@ -1,4 +1,4 @@
-package co.edu.javeriana.pica.jeemp.resources;
+package co.edu.javeriana.pica.jeemp.resources.catalogue;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,6 +22,13 @@ public class Catalogue {
     }
 
     public Catalogue(String brand, String product, double price) {
+        this.brand = brand;
+        this.product = product;
+        this.price = price;
+    }
+
+    public Catalogue(long id, String brand, String product, double price) {
+        this.id = id;
         this.brand = brand;
         this.product = product;
         this.price = price;

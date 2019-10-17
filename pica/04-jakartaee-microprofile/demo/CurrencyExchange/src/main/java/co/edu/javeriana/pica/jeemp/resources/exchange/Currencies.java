@@ -1,4 +1,4 @@
-package co.edu.javeriana.pica.jeemp.resources;
+package co.edu.javeriana.pica.jeemp.resources.exchange;
 
 public enum Currencies {
 
@@ -9,7 +9,7 @@ public enum Currencies {
 
     private double rate;
 
-    private Currencies(double rate) {
+    Currencies(double rate) {
         this.rate = rate;
     }
 

@@ -1,4 +1,4 @@
-package co.edu.javeriana.pica.jeemp.resources;
+package co.edu.javeriana.pica.jeemp.resources.exchange;
 
 import javax.enterprise.context.ApplicationScoped;
 
