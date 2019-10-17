@@ -18,6 +18,9 @@ public class Catalogue {
     private String product;
     private double price;
 
+    public Catalogue() {
+    }
+
     public Catalogue(String brand, String product, double price) {
         this.brand = brand;
         this.product = product;
