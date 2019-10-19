@@ -44,6 +44,6 @@
     </dependencies>
 
     <build>
-        <finalName>CurrencyExchange</finalName>
+        <finalName>currency-exchange</finalName>
     </build>
 </project>

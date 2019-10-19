@@ -19,4 +19,4 @@ RUN wget --quiet https://bit.ly/2Or4ltp -O ${MARIADB_DRIVER} && mv ${MARIADB_DRI
 RUN echo ${JDBC_CONNECTION_POOL_CMD} > ${POSTBOOT_COMMANDS} && \
     echo ${JDBC_RESOURCE_CMD} >> ${POSTBOOT_COMMANDS}
 
-COPY --from=builder /build/target/ProductCatalogue.war ${DEPLOY_DIR}
+COPY --from=builder /build/target/product-catalogue.war ${DEPLOY_DIR}

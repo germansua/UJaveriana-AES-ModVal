@@ -3,13 +3,13 @@ package co.edu.javeriana.pica.jeemp.resources.catalogue;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.ws.rs.*;
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.ObjectInputStream;
 import java.io.StringReader;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class CatalogueResource {
     private void init() {
         target = ClientBuilder
                 .newClient()
-                .target("http://currency-exchange:8090/CurrencyExchange")
+                .target("http://currency-exchange:8080/currency-exchange")
                 .path("/api/resources/exchange");
     }
 
@@ -42,8 +42,18 @@ public class CatalogueResource {
         Response response = target
                 .queryParam("currency", currency)
                 .queryParam("value", catalogue.getPrice())
-                .request().get();
-        String rawValue = Json.createParser(new StringReader(response.getEntity().toString())).getValue().toString();
-        return new Catalogue(catalogue.getId(), catalogue.getBrand(), catalogue.getProduct(), Double.valueOf(rawValue));
+                .request()
+                .get();
+
+        String rawResponse = response.readEntity(JsonObject.class).toString();
+
+        try (JsonReader reader = Json.createReader(new StringReader(rawResponse))) {
+            JsonObject jsonResponse = reader.readObject();
+            return new Catalogue(
+                    catalogue.getId(),
+                    catalogue.getBrand(),
+                    catalogue.getProduct(),
+                    jsonResponse.getJsonNumber("newValue").doubleValue());
+        }
     }
 }

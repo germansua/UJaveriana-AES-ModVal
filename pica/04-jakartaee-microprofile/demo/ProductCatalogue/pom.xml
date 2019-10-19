@@ -44,6 +44,6 @@
     </dependencies>
 
     <build>
-        <finalName>ProductCatalogue</finalName>
+        <finalName>product-catalogue</finalName>
     </build>
 </project>

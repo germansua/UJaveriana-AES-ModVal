@@ -8,4 +8,4 @@ RUN mvn clean package
 
 # Running stage
 FROM payara/server-web:5.193.1
-COPY --from=builder /build/target/CurrencyExchange.war ${DEPLOY_DIR}
+COPY --from=builder /build/target/currency-exchange.war ${DEPLOY_DIR}
