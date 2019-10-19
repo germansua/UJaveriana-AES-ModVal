@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: currency-exchange-deploy
+  labels:
+    app: currency-exchange
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: currency-exchange-pod
+  template:
+    metadata:
+      labels:
+        app: currency-exchange-pod
+    spec:
+      containers:
+        - name: currency-exchange
+          image: 'javeriana-aes-pica/currency-exchange:1.0.0'
+          ports:
+            - containerPort: 8080
+              name: http

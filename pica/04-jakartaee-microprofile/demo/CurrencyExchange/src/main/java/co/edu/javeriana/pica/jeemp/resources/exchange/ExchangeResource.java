@@ -1,5 +1,8 @@
 package co.edu.javeriana.pica.jeemp.resources.exchange;
 
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
+
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -16,6 +19,8 @@ public class ExchangeResource {
     private ExchangeService exchangeService;
 
     @GET
+    @Timed(name = "getExchangeRateTime", absolute = true, description = "Time taken to process a currency exchange")
+    @Counted(name = "getExchangeRateCount", absolute = true, description = "Number of invocations of a currency exchange")
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject getExchangeRate(@QueryParam("currency") String currency, @QueryParam("value") double value) {
         currency = currency != null ? currency : Currencies.USD.toString();
