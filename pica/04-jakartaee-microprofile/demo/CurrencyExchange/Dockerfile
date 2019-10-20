@@ -1,5 +1,5 @@
 # Building stage
-FROM maven:3.6.1-jdk-8 AS builder
+FROM maven:3.6.2-jdk-11-slim AS builder
 WORKDIR /build
 COPY pom.xml .
 RUN mvn dependency:go-offline
@@ -7,5 +7,6 @@ COPY ./src ./src
 RUN mvn clean package
 
 # Running stage
-FROM payara/server-web:5.193.1
-COPY --from=builder /build/target/currency-exchange.war ${DEPLOY_DIR}
+FROM openjdk:11.0.5-jdk-slim-buster
+COPY --from=builder /build/target/currency-exchange-thorntail.jar .
+ENTRYPOINT java -Djava.net.preferIPv4Stack=true -jar currency-exchange-thorntail.jar

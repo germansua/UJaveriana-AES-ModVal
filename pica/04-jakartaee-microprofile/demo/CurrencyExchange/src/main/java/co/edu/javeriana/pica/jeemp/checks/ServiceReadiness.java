@@ -22,7 +22,7 @@ public class ServiceReadiness implements HealthCheck {
                         .get()
                         .getStatus();
         return HealthCheckResponse
-                .named(ExchangeResource.class.getSimpleName())
+                .named(ExchangeResource.class.getSimpleName() + ServiceReadiness.class.getSimpleName())
                 .withData("Checking app response status code", status)
                 .state(status == 200)
                 .build();

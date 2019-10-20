@@ -11,21 +11,26 @@
   <packaging>war</packaging>
 
     <properties>
+        <version.thorntail>2.5.0.Final</version.thorntail>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 
-    <dependencies>
-        <!-- JakartaEE API -->
-        <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>8.0.0</version>
-            <scope>provided</scope>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.thorntail</groupId>
+                <artifactId>bom-all</artifactId>
+                <version>${version.thorntail}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
+    <dependencies>
         <!-- Microprofile API -->
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
@@ -33,6 +38,12 @@
             <version>3.0</version>
             <type>pom</type>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Thorntail Microprofile -->
+        <dependency>
+            <groupId>io.thorntail</groupId>
+            <artifactId>microprofile</artifactId>
         </dependency>
 
         <dependency>
@@ -45,5 +56,20 @@
 
     <build>
         <finalName>currency-exchange</finalName>
+        <plugins>
+            <plugin>
+                <groupId>io.thorntail</groupId>
+                <artifactId>thorntail-maven-plugin</artifactId>
+                <version>${version.thorntail}</version>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>

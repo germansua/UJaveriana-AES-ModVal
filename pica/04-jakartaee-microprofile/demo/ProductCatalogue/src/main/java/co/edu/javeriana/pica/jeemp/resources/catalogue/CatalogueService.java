@@ -1,19 +1,19 @@
 package co.edu.javeriana.pica.jeemp.resources.catalogue;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.LocalBean;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.json.Json;
 import javax.json.JsonObject;
-import javax.json.JsonReader;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
-import java.io.StringReader;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @LocalBean
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
@@ -22,14 +22,18 @@ public class CatalogueService {
     @PersistenceContext(name = "catalogue-pu")
     private EntityManager entityManager;
 
+    private Client client;
     private WebTarget target;
 
     @PostConstruct
     private void init() {
-        target = ClientBuilder
-                .newClient()
-                .target("http://currency-exchange:8080/currency-exchange")
-                .path("/api/resources/exchange");
+        client = ClientBuilder
+                .newBuilder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(2, TimeUnit.SECONDS)
+                .build();
+
+        target = client.target("http://currency-exchange:8080").path("/api/resources/exchange");
     }
 
     public List<Catalogue> fetchAll() {
@@ -38,7 +42,7 @@ public class CatalogueService {
                 .getResultList();
     }
 
-    public Catalogue fetchById(long id) {
+    private Catalogue fetchById(long id) {
         return entityManager
                 .createNamedQuery("Catalogue.findById", Catalogue.class)
                 .setParameter("id", id)
@@ -49,7 +53,7 @@ public class CatalogueService {
 
     public Catalogue fetchByIdPriceByCurrency(long id, String currency) {
         Catalogue catalogue = fetchById(id);
-        double price;
+        double price = catalogue.getPrice();
 
         if (currency != null && !currency.isEmpty()) {
             Response response = target
@@ -58,16 +62,15 @@ public class CatalogueService {
                     .request()
                     .get();
 
-            String rawResponse = response.readEntity(JsonObject.class).toString();
-
-            try (JsonReader reader = Json.createReader(new StringReader(rawResponse))) {
-                JsonObject jsonResponse = reader.readObject();
-                price = jsonResponse.getJsonNumber("newValue").doubleValue();
-            }
-        } else {
-            price = catalogue.getPrice();
+            JsonObject rawJsonResponse = response.readEntity(JsonObject.class);
+            price = rawJsonResponse.getJsonNumber("newValue").doubleValue();
         }
 
         return new Catalogue(catalogue.getId(), catalogue.getBrand(), catalogue.getProduct(), price);
+    }
+
+    @PreDestroy
+    private void tearDown() {
+        client.close();
     }
 }
