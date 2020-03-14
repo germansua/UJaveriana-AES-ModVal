@@ -1,0 +1,12 @@
+apiVersion: skaffold/v1beta15
+kind: Config
+metadata:
+  name: currencyexchange
+build:
+  artifacts:
+  - image: javeriana-aes-pica/currency-exchange
+deploy:
+  kubectl:
+    manifests:
+    - deployment.yml
+    - service.yml

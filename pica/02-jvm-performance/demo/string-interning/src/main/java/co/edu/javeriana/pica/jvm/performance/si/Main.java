@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class Main {
 
     public static void main(String[] args) {
-        final int NUMBER_OF_STRINGS = 5_000_000;
+        final int NUMBER_OF_STRINGS = 50_000_000;
         List<String> strings = new ArrayList<>(NUMBER_OF_STRINGS);
 
         System.out.printf("Demo started interning %s strings...%n", NumberFormat.getNumberInstance().format(NUMBER_OF_STRINGS));

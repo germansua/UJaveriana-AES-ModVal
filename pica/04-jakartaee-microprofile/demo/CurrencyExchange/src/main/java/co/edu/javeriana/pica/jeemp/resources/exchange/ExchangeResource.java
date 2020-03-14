@@ -11,6 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 @Path("exchange")
 public class ExchangeResource {
@@ -24,7 +26,16 @@ public class ExchangeResource {
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject getExchangeRate(@QueryParam("currency") String currency, @QueryParam("value") double value) {
         currency = currency != null ? currency : Currencies.USD.toString();
+
+        String hostName = "null";
+        try {
+            hostName = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
         return Json.createObjectBuilder()
+                .add("host", hostName)
                 .add("to", currency)
                 .add("newValue", exchangeService.exchangeUSDTo(currency, value))
                 .build();
