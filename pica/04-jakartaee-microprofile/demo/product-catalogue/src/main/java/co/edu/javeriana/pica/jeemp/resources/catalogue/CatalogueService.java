@@ -4,6 +4,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -20,6 +21,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -33,12 +35,20 @@ public class CatalogueService {
     private EntityManager entityManager;
 
     @Inject
-    @ConfigProperty(name = "currency.exchange.url")
-    private String currencyExchangeServiceUrl;
+    @ConfigProperty(name = "currency.exchange.hostname")
+    private String currencyExchangeServiceHostname;
 
     @Inject
-    @ConfigProperty(name = "currency.exchange.port")
+    @ConfigProperty(name = "currency.exchange.port", defaultValue = "8080")
     private int currencyExchangeServicePort;
+
+    @Inject
+    @ConfigProperty(name = "currency.resource.path")
+    private Optional<String> currencyExchangePath;
+
+    @Inject
+    @RestClient
+    private CurrencyExchangeClient currencyExchangeClient;
 
     private Client client;
     private WebTarget target;
@@ -52,8 +62,8 @@ public class CatalogueService {
                 .build();
 
         target = client
-                .target(String.format("http://%s:%d", currencyExchangeServiceUrl, currencyExchangeServicePort))
-                .path("/api/resources/exchange");
+                .target(String.format("http://%s:%d", currencyExchangeServiceHostname, currencyExchangeServicePort))
+                .path(currencyExchangePath.orElse("/api/resources/exchange"));
     }
 
     @Retry(delay = 500, jitter = 150, maxRetries = 5, maxDuration = 3500)
@@ -85,6 +95,7 @@ public class CatalogueService {
         double price = catalogue.getPrice();
 
         if (currency != null && !currency.isEmpty()) {
+            /*
             Response response = target
                     .queryParam("currency", currency)
                     .queryParam("value", catalogue.getPrice())
@@ -92,6 +103,9 @@ public class CatalogueService {
                     .get();
 
             JsonObject rawJsonResponse = response.readEntity(JsonObject.class);
+         */
+
+            JsonObject rawJsonResponse = currencyExchangeClient.getExchangeRate(currency, price);
             price = rawJsonResponse.getJsonNumber("newValue").doubleValue();
         }
 

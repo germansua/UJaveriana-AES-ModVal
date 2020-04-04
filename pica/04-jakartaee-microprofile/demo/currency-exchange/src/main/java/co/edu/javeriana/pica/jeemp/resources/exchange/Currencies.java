@@ -3,9 +3,9 @@ package co.edu.javeriana.pica.jeemp.resources.exchange;
 public enum Currencies {
 
     USD(1.0),
-    GBP(0.78),
-    EUR(0.91),
-    COP(3423.51);
+    GBP(0.81),
+    EUR(0.93),
+    COP(4025);
 
     private double rate;
 

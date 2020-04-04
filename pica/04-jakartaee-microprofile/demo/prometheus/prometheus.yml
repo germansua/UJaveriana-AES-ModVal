@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 15s
+  external_labels:
+    monitor: 'exchange-monitor'
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['currency-exchange:8080', 'product-catalogue:8080']

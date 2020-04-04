@@ -1,0 +1,7 @@
+thorntail:
+  jaeger:
+    service-name: currency-exchange
+    sampler-type: const
+    sampler-parameter: 1
+    enable-b3-header-propagation: true
+    remote-reporter-http-endpoint: 'http://mp-jaeger:14268/api/traces'

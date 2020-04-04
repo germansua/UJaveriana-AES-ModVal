@@ -1,7 +1,11 @@
 package co.edu.javeriana.pica.jeemp.resources.exchange;
 
+import io.opentracing.Tracer;
+import io.vavr.control.Try;
 import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Metered;
 import org.eclipse.microprofile.metrics.annotation.Timed;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.inject.Inject;
 import javax.json.Json;
@@ -12,7 +16,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 @Path("exchange")
 public class ExchangeResource {
@@ -20,19 +23,18 @@ public class ExchangeResource {
     @Inject
     private ExchangeService exchangeService;
 
+    @Inject
+    private Tracer tracer;
+
     @GET
-    @Timed(name = "getExchangeRateTime", absolute = true, description = "Time taken to process a currency exchange")
-    @Counted(name = "getExchangeRateCount", absolute = true, description = "Number of invocations of a currency exchange")
     @Produces(MediaType.APPLICATION_JSON)
+    @Traced(operationName = "ExchangeResource.getExchangeRate")
+    @Timed(name = "ExchangeResource_getExchangeRateTime", absolute = true, description = "Time taken to process a currency exchange")
+    @Counted(name = "ExchangeResource_getExchangeRateCount", absolute = true, description = "Number of invocations of a currency exchange")
+    @Metered(name = "ExchangeResource_getExchangeRateMetered", tags = {"endpoint=rest"}, description = "Throughput of a currency exchange")
     public JsonObject getExchangeRate(@QueryParam("currency") String currency, @QueryParam("value") double value) {
         currency = currency != null ? currency : Currencies.USD.toString();
-
-        String hostName = "null";
-        try {
-            hostName = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        String hostName = Try.of(() -> InetAddress.getLocalHost().getHostName()).getOrElse("null");
 
         return Json.createObjectBuilder()
                 .add("host", hostName)
