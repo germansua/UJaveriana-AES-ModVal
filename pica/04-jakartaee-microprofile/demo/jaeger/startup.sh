@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -d --rm -p 6831:6831/udp -p 16686:16686 --network product-catalogue-net --name mp-jaeger jaegertracing/all-in-one:1.17.1 
+docker run -d --rm -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686 -p 14268:14268 --network product-catalogue-net --name mp-jaeger jaegertracing/all-in-one:1.17.1 

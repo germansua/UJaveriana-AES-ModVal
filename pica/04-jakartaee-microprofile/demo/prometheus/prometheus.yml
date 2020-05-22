@@ -7,4 +7,4 @@ scrape_configs:
     scrape_interval: 5s
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['currency-exchange:8080', 'product-catalogue:8080']
+      - targets: ['currency-exchange-quarkus:8080', 'currency-exchange:8080', 'product-catalogue:8080']
