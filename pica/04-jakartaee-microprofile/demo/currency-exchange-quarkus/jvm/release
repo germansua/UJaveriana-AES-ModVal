@@ -1,0 +1,2 @@
+JAVA_VERSION="11.0.4"
+MODULES="java.base java.logging java.management java.transaction.xa java.xml java.sql jdk.management jdk.unsupported"
