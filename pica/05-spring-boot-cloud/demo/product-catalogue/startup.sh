@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build . -t javeriana-aes-modval/spring-product-catalogue:1.0
-docker run -d -p 8181:8080 --net product-catalogue-net --name spring-product-catalogue javeriana-aes-modval/spring-product-catalogue:1.0
+docker build . -t javeriana-aes-pica/spring-product-catalogue:1.0
+docker run -d -p 8081:8081 --net product-catalogue-net --name product-catalogue javeriana-aes-pica/spring-product-catalogue:1.0
