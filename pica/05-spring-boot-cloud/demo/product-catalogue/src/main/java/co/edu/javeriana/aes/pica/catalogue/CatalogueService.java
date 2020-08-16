@@ -1,5 +1,6 @@
 package co.edu.javeriana.aes.pica.catalogue;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class CatalogueService {
         return catalogueRepository.findById(id);
     }
 
+    @HystrixCommand(fallbackMethod = "fetchByIdPriceByCurrencyFallback")
     public Catalogue fetchByIdPriceByCurrency(long id, String currency) throws ProductNotFoundInCatalogueException {
         var catalogueOptional = fetchById(id);
         var catalogue = catalogueOptional
@@ -35,5 +37,9 @@ public class CatalogueService {
         var exchangeRate = currencyExchangeClient.getExchangeRate(currency, price);
         log.info("currency exchange host: {}", exchangeRate.getHost());
         return new Catalogue(catalogue.getId(), catalogue.getBrand(), catalogue.getProduct(), exchangeRate.getNewValue());
+    }
+
+    public Catalogue fetchByIdPriceByCurrencyFallback(long id, String currency) {
+        return Catalogue.builder().id(-1).brand("ERROR").product("ERROR").build();
     }
 }

@@ -1,16 +1,15 @@
 package co.edu.javeriana.aes.pica.catalogue;
 
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
+// import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@RibbonClient("ZUUL-PROXY-GW")
 // @RibbonClient("CURRENCY-EXCHANGE")
-// @FeignClient("CURRENCY-EXCHANGE")
-@RequestMapping("/currency-exchange/api/exchange")
 // @RequestMapping("/api/exchange")
+@FeignClient("ZUUL-PROXY-GW")
+@RequestMapping("/currency-exchange/api/exchange")
 public interface CurrencyExchangeClient {
 
     @GetMapping
