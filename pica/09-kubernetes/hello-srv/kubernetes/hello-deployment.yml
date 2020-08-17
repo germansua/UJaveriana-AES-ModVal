@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deployment
+  labels:
+    name: hello-deployment
+    env: dev
+spec:
+  template:
+    metadata:
+      name: hello-pod
+      labels:
+        name: hello-pod
+    spec:
+      containers:
+        - name: hello
+          image: javeriana-aes-pica/kubernetes-hello:1.0
+  replicas: 1
+  selector:
+    matchLabels:
+      name: hello-pod

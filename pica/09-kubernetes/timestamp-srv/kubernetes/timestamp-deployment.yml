@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timestamp-deployment
+  labels:
+    name: timestamp-deployment
+    env: dev
+spec:
+  template:
+    metadata:
+      labels:
+        name: timestamp-pod
+    spec:
+      containers:
+        - name: timestamp
+          image: javeriana-aes-pica/kubernetes-timestamp:1.0
+  replicas: 2
+  selector:
+    matchLabels:
+      name: timestamp-pod
