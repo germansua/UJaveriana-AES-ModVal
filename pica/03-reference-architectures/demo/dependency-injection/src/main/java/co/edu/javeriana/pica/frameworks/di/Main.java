@@ -1,4 +1,4 @@
-package co.edu.javeriana.pica.framewors.di;
+package co.edu.javeriana.pica.frameworks.di;
 
 public class Main {
 
