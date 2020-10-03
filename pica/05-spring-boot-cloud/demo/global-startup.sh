@@ -4,7 +4,7 @@
 mvn clean package -T4 -Dmaven.test.skip=true
 
 # Creates the required network
-sh docker-network.sh
+source docker-network.sh
 
 # Runs one by one every startup.sh script
 cd database
