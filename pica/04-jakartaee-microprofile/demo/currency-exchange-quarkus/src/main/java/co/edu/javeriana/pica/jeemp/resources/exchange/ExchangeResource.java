@@ -1,11 +1,9 @@
 package co.edu.javeriana.pica.jeemp.resources.exchange;
 
-import io.opentracing.Tracer;
 import io.vavr.control.Try;
 import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.eclipse.microprofile.metrics.annotation.Metered;
 import org.eclipse.microprofile.metrics.annotation.Timed;
-import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.inject.Inject;
 import javax.json.Json;
@@ -23,12 +21,8 @@ public class ExchangeResource {
     @Inject
     ExchangeService exchangeService;
 
-    // @Inject
-    // Tracer tracer;
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    // @Traced(operationName = "ExchangeResource.getExchangeRate")
     @Timed(name = "ExchangeResource_getExchangeRateTime", absolute = true, description = "Time taken to process a currency exchange")
     @Counted(name = "ExchangeResource_getExchangeRateCount", absolute = true, description = "Number of invocations of a currency exchange")
     @Metered(name = "ExchangeResource_getExchangeRateMetered", tags = {"endpoint=rest"}, description = "Throughput of a currency exchange")
