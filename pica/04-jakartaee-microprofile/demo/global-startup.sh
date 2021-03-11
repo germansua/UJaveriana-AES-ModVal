@@ -16,6 +16,9 @@ sh startup.sh
 cd ../prometheus
 sh startup.sh
 
+cd ../grafana
+sh startup.sh
+
 cd ../currency-exchange-quarkus
 sh startup.sh
 

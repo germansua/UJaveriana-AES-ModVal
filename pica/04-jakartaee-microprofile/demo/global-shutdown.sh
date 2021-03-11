@@ -10,5 +10,7 @@ docker stop mp-jaeger
 
 docker stop mp-prometheus
 
+docker stop mp-grafana
+
 docker stop catalogue-mariadb
 docker rm catalogue-mariadb
