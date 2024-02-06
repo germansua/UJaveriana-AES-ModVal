@@ -27,4 +27,4 @@ Se deben ejecutar el siguientes comandos:
 
 ### Cómo ejecucutarlo desde el código
 - Ejecutar: `sh startup.sh`
-- Detener: `teardown.sh`
+- Detener: `sh teardown.sh`
