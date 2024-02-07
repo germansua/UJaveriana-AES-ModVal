@@ -22,9 +22,9 @@ Se deben ejecutar el siguientes comandos:
 - Detener: `ctr + c`
 - Limpiar la base de datos: `rm monsters.db`
 
-### Dependencias para ejecución desde contenerdores
+### Dependencias para ejecución desde contenedores
 - Docker o Podman
 
-### Cómo ejecucutarlo desde el código
+### Cómo ejecucutarlo desde contenerdores
 - Ejecutar: `sh startup.sh`
 - Detener: `sh teardown.sh`
