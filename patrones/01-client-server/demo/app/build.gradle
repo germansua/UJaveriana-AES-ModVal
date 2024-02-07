@@ -37,6 +37,12 @@ application {
     mainClass = 'co.edu.javeriana.aes.patrones.Main'
 }
 
+jar {
+    manifest {
+        attributes('Main-Class': 'co.edu.javeriana.aes.patrones.Main')
+    }
+}
+
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
