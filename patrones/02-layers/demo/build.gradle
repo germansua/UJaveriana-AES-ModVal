@@ -5,7 +5,8 @@ plugins {
 }
 
 group = 'co.edu.javeriana.aes'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
+archivesBaseName = "monsters"
 
 java {
 	sourceCompatibility = '17'
